@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <form action="/update" method="POST">
+    <input type="hidden" name="id" value="{{student._id}}">
+    Tên: <input type="text" name="txtName"  value="{{student.name}}"><br><br>
+    Giá: <input type="text" name="txtTuoi"  value="{{student.tuoi}}"><br><br>
+    <input type="submit" value="Cập nhật">
+    </form>
+   
+</body>
+</html>

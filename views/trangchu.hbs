@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        header{
+            border:1px solid #ccc;
+            background-color:#73ad21;
+            color:white;
+            text-align:center;
+        }
+        input[type=text]{
+            padding: 5px;
+            border: 2px solid purple;
+        }
+        input[type=submit]{
+            padding: 5px;
+        }
+    </style>
+    <title>HOME</title>
+</head>
+<body>
+    <header>
+        <h1>ATN Company</h1>
+
+    </header>
+    <h2>Danh mục sản phẩm</h2><br>
+    <form action="/search" method="post">
+        Tên sản phẩm: <input type="text" name="txtSearch">
+        <input type="submit" value="Tìm kiếm" style="padding: 5px;">
+    </form>
+
+
+    <br>
+    <table border="1" cellpadding="10" align="center" cellspacing="0" >
+    <tr style="background-color: #EEEEEE;">
+        <th style="width: 500px;">Tên sản phẩm</th>
+        <th>Đơn giá (VNĐ</th>
+        <th>Hình ảnh</th>
+        <th colspan="2">Tuy chon</th>
+    </tr>
+    
+    {{#each data}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{tuoi}}</td>
+        <td><img src="" alt="" width="60" height="50"></td>
+        <td><a href="/delete?id={{_id}}">Xóa</a></td>
+        <td><a href="/edit?id={{_id}}">Sửa</a></td>
+    </tr>
+    {{/each}}
+    </table>
+    
+    <h2>Thêm mới</h2>
+    <form action="/insert" method="POST">
+    Tên: <input type="text" name="txtName">
+    Giá: <input type="text" name="txtTuoi">
+    Hình ảnh: <input type="text" name="picture">
+    <input type="submit" value = "Thêm">
+
+    </form>
+
+    
+
+</body>
+</html>
