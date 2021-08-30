@@ -13,6 +13,7 @@
         }
         input[type=text]{
             padding: 5px;
+            margin: 5px;
             border: 2px solid purple;
         }
         input[type=submit]{
@@ -54,10 +55,10 @@
     </table>
     
     <h2>Thêm mới</h2>
-    <form action="/insert" method="POST">
-    Tên: <input type="text" name="txtName">
-    Giá: <input type="text" name="txtTuoi">
-    Hình ảnh: <input type="text" name="picture">
+    <form action="/insert" method="POST" >
+    Tên: <input type="text" name="txtName" >{{error.name}}<br>
+    Giá: <input type="text" name="txtTuoi">{{error.tuoi}}<br>
+    Hình ảnh: <input type="text" name="picture"><br>
     <input type="submit" value = "Thêm">
 
     </form>

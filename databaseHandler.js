@@ -1,7 +1,7 @@
 
 const {ObjectId,MongoClient} = require('mongodb');
-// const url = 'mongodb://localhost:27017'
-const url = 'mongodb+srv://dungna0912:naz69abc@cluster0.vuqmk.mongodb.net/test'
+const url = 'mongodb://localhost:27017'
+// const url = 'mongodb+srv://dungna0912:naz69abc@cluster0.vuqmk.mongodb.net/test'
 const DATABASE_NAME = 'GCH0803DB'
 async function getDB() {
     const client = await MongoClient.connect(url);

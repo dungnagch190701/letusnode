@@ -31,10 +31,27 @@ app.post('/insert',async (req,res)=>{
     const nameInput = req.body.txtName;
     const tuoiInput = req.body.txtTuoi;
     const picture = req.body.picture;
-    const newstudent = {name:nameInput,tuoi:Int32(tuoiInput),picture:picture}
-    await insertStudent(newstudent);
-    res.redirect('/')
-    
+    var err = {}
+    var isErr = false;
+    if(nameInput=="")
+    {
+        err.name='Nhap lai ten';
+        isErr = true;
+
+    }
+    if(tuoiInput=="")
+    {
+        err.tuoi = 'Ban chua nhap tuoi'
+        isErr=true;
+    }
+    if(isErr){
+        res.render('trangchu',{error:err})
+    }
+    else{
+        const newstudent = {name:nameInput,tuoi:Int32(tuoiInput),picture:picture}
+        await insertStudent(newstudent);
+        res.redirect('/')
+    }
 })
 
 app.post('/search',async (req,res)=>{
@@ -68,6 +85,7 @@ app.post('/update',async (req,res)=>{
     await updateStudent(id,nameInput,tuoiInput);
     res.redirect('/');
 })
+
 
 
 const PORT = process.env.PORT || 5000
