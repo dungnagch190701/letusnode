@@ -9,31 +9,31 @@ async function getDB() {
     return dbo;
 }
 
-async function searchStudent(searchInput) {
+async function searchProduct(searchInput) {
     const dbo = await getDB();
-    const allStudents = await dbo.collection("students").find({ name: searchInput }).toArray();
+    const allStudents = await dbo.collection("products").find({ name: searchInput }).toArray();
     return allStudents;
 }
 
-async function deleteStudent(deleteInput) {
+async function deleteProduct(deleteInput) {
     const dbo = await getDB();
-    return dbo.collection("students").deleteOne({ _id: ObjectId(deleteInput) });
+    return dbo.collection("products").deleteOne({ _id: ObjectId(deleteInput) });
 }
 
-async function insertStudent(newstudent) {
+async function insertProduct(newproduct) {
     const dbo = await getDB();
-    await dbo.collection('students').insertOne(newstudent);
+    await dbo.collection('products').insertOne(newproduct);
 }
 
-async function editStudent(editInput) {
+async function editProduct(editInput) {
     const dbo = await getDB();
-    return dbo.collection("students").findOne({ _id: ObjectId(editInput) });
+    return dbo.collection("products").findOne({ _id: ObjectId(editInput) });
 }
 
-async function updateStudent(id,nameInput,tuoiInput) {
+async function updateProduct(id,nameInput,priceInput,picture) {
     const dbo = await getDB();
-    dbo.collection("students").updateOne({_id:ObjectId(id)},{$set:{name:nameInput,tuoi:tuoiInput}})
+    dbo.collection("products").updateOne({_id:ObjectId(id)},{$set:{name:nameInput,price:priceInput,picture:picture}})
 }
 
 
-module.exports = {getDB,searchStudent,deleteStudent,insertStudent,editStudent,updateStudent}
+module.exports = {getDB,searchProduct,deleteProduct,insertProduct,editProduct,updateProduct}

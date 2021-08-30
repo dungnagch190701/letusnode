@@ -28,6 +28,8 @@
 
     </header>
     <h2>Danh mục sản phẩm</h2><br>
+    
+    <!-- FORM TIM KIEM -->
     <form action="/search" method="post">
         Tên sản phẩm: <input type="text" name="txtSearch">
         <input type="submit" value="Tìm kiếm" style="padding: 5px;">
@@ -46,8 +48,8 @@
     {{#each data}}
     <tr>
         <td>{{name}}</td>
-        <td>{{tuoi}}</td>
-        <td><img src="" alt="" width="60" height="50"></td>
+        <td>{{price}}</td>
+        <td><img src="{{picture}}" alt="" width="60" height="50"></td>
         <td><a href="/delete?id={{_id}}">Xóa</a></td>
         <td><a href="/edit?id={{_id}}">Sửa</a></td>
     </tr>
@@ -57,7 +59,7 @@
     <h2>Thêm mới</h2>
     <form action="/insert" method="POST" >
     Tên: <input type="text" name="txtName" >{{error.name}}<br>
-    Giá: <input type="text" name="txtTuoi">{{error.tuoi}}<br>
+    Giá: <input type="text" name="txtPrice">{{error.tuoi}}<br>
     Hình ảnh: <input type="text" name="picture"><br>
     <input type="submit" value = "Thêm">
 

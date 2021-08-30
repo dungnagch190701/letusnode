@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input[type=text]{
+            width: 50%;
+            padding: 5px;
+            margin: 5px;
+            border: 2px solid purple;
+        }
+        input[type=submit]{
+            padding: 5px;
+        }
+        h2{
+            border:1px solid #ccc;
+            background-color:#73ad21;
+            color:white;
+            text-align:center;
+        }
+    </style>
     <title>Edit</title>
 </head>
 <body>
+    <h2>Chỉnh sửa thông tin sản phẩm</h2>
     <form action="/update" method="POST">
-    <input type="hidden" name="id" value="{{student._id}}">
-    Tên: <input type="text" name="txtName"  value="{{student.name}}"><br><br>
-    Giá: <input type="text" name="txtTuoi"  value="{{student.tuoi}}"><br><br>
+    <input type="hidden" name="id" value="{{product._id}}">
+    Tên: <input type="text" name="txtName"  value="{{product.name}}"><br><br>
+    Giá: <input type="text" name="txtPrice"  value="{{product.price}}"><br><br>
+    Hình ảnh <input type="text" name="picture" value="{{product.picture}}"><br><br>
+    <img src="{{product.picture}}" alt="">
     <input type="submit" value="Cập nhật">
     </form>
    

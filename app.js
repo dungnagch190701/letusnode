@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const {getCurrentDate} = require('./Utils')
 const {Int32} = require('mongodb');
-const { getDB,searchStudent,deleteStudent,insertStudent,editStudent,updateStudent } = require('./databaseHandler');
+const { getDB,searchProduct,deleteProduct,editProduct,updateProduct, insertProduct } = require('./databaseHandler');
 
 
 app.use(express.urlencoded({extended:true}))
@@ -11,25 +11,25 @@ app.set('view engine','hbs')
 
 app.get('/',async (req,res)=>{
     const dbo = await getDB();
-    const allStudents = await dbo.collection('students').find({}).toArray()
-    res.render('trangchu',{data:allStudents})
+    const allProducts = await dbo.collection('products').find({}).toArray()
+    res.render('trangchu',{data:allProducts})
 })
 
-app.get('/about',(req,res)=>{
-    res.setHeader('Content-Type','text/html')
-    res.end('About page');
-})
+// app.get('/about',(req,res)=>{
+//     res.setHeader('Content-Type','text/html')
+//     res.end('About page');
+// })
 
-app.post('/survey',(req,res)=>{
-    const nameInput = req.body.txtName;
-    const jobInput = req.body.Job;
-    res.render('survey',{name:nameInput,job:jobInput,now:getCurrentDate()})
+// app.post('/survey',(req,res)=>{
+//     const nameInput = req.body.txtName;
+//     const jobInput = req.body.Job;
+//     res.render('survey',{name:nameInput,job:jobInput,now:getCurrentDate()})
  
-})
+// })
 
 app.post('/insert',async (req,res)=>{
     const nameInput = req.body.txtName;
-    const tuoiInput = req.body.txtTuoi;
+    const priceInput = req.body.txtPrice;
     const picture = req.body.picture;
     var err = {}
     var isErr = false;
@@ -39,40 +39,44 @@ app.post('/insert',async (req,res)=>{
         isErr = true;
 
     }
-    if(tuoiInput=="")
+    if(priceInput=="")
     {
-        err.tuoi = 'Ban chua nhap tuoi'
+        err.tuoi = 'Nhap lai gia'
         isErr=true;
     }
     if(isErr){
-        res.render('trangchu',{error:err})
+        dbo = await getDB()
+        const allProducts = await dbo.collection('products').find({}).toArray()
+        res.render('trangchu',{error:err,data:allProducts})
     }
     else{
-        const newstudent = {name:nameInput,tuoi:Int32(tuoiInput),picture:picture}
-        await insertStudent(newstudent);
+        const newproduct = {name:nameInput,price:Int32(priceInput),picture:picture}
+        await insertProduct(newproduct);
         res.redirect('/')
     }
+
+
 })
 
 app.post('/search',async (req,res)=>{
     const searchInput = req.body.txtSearch;
-    const allStudents = await searchStudent(searchInput);
-    res.render('trangchu',{data:allStudents});
+    const allProducts = await searchProduct(searchInput);
+    res.render('trangchu',{data:allProducts});
 
 
 })
 
 app.get('/delete',async(req,res)=>{
     const deleteInput = req.query.id;
-    await deleteStudent(deleteInput);
+    await deleteProduct(deleteInput);
     res.redirect('/')
 
 })
 
 app.get('/edit',async(req,res)=>{
     const editInput = req.query.id;
-    const edit = await editStudent(editInput)
-    res.render('edit',{student:edit})
+    const edit = await editProduct(editInput)
+    res.render('edit',{product:edit})
 
 
 
@@ -81,8 +85,9 @@ app.get('/edit',async(req,res)=>{
 app.post('/update',async (req,res)=>{
     const id = req.body.id;
     const nameInput = req.body.txtName;
-    const tuoiInput = req.body.txtTuoi;
-    await updateStudent(id,nameInput,tuoiInput);
+    const priceInput = req.body.txtPrice;
+    const picture = req.body.picture;
+    await updateProduct(id,nameInput,priceInput,picture);
     res.redirect('/');
 })
 
